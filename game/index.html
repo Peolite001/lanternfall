@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanternfall &mdash; a duel of beacons and tides</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="vignette" aria-hidden="true"></div>
+
+<!-- The title screen -->
+<section id="title-screen" class="screen title-screen">
+  <div class="title-glow" aria-hidden="true"></div>
+  <div class="title-stack">
+    <p class="title-kicker">A duel of beacons and tides</p>
+    <h1 class="title-name">Lanternfall</h1>
+    <p class="title-tag">Two keepers. Three beacons. One Flame that must not go out.</p>
+    <p class="title-dock"><span></span><b>20</b><span></span></p>
+    <div class="title-art" aria-hidden="true">
+      <span class="title-card tide-salt"><i></i><svg viewBox="0 0 24 24"><path d="M2 15c3 0 3-4 6-4s3 4 6 4 3-4 6-4 3 4 6 4"/></svg></span>
+      <span class="title-card tide-ember"><i></i><svg viewBox="0 0 24 24"><path d="M12 2c3 5 7 6 7 11a7 7 0 0 1-14 0c0-3 2-4 3-6 1 2 2 2 2 4 1-3 2-5 2-9z"/></svg></span>
+      <span class="title-card tide-gale"><i></i><svg viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 18h7"/></svg></span>
+      <span class="title-card tide-moss"><i></i><svg viewBox="0 0 24 24"><path d="M20 4c0 9-6 15-14 15 0-9 6-15 14-15zM4 20c2-6 5-9 9-11"/></svg></span>
+    </div>
+    <div class="title-actions">
+      <button id="start-button" class="brass-button">Light the beacons</button>
+      <button id="how-to-play" class="ghost-button">How to play</button>
+    </div>
+    <p class="title-hint">Mouse or keyboard &middot; 1&ndash;8 pick a card &middot; A/D aim &middot; Enter play &middot; Space end turn</p>
+  </div>
+
+</section>
+
+<!-- The rules, reachable from the title and the table -->
+<aside id="briefing" class="briefing hidden">
+    <h2>The rules of the pier</h2>
+    <ol>
+      <li><strong>Flame is life.</strong> Both keepers begin at 30. Take the other to 0.</li>
+      <li><strong>Oil pays for cards.</strong> You gain 1 each turn, up to 10, and it refills each turn.</li>
+      <li><strong>Keepers</strong> sit in one of three beacons. At the end of your turn each strikes the Keeper facing it, or the enemy Flame if that beacon is open.</li>
+      <li><strong>Beacon tides.</strong> A Keeper whose tide matches its beacon's gains +1 Power.</li>
+      <li><strong>Spring Tide</strong> every third round: every Keeper strikes twice. Save your swings for it.</li>
+      <li><strong>Charms</strong> burn, lift, or thicken a Keeper. An empty deck costs 3 Flame a turn.</li>
+    </ol>
+  <div class="briefing-actions">
+    <button id="begin-duel" class="brass-button">Light the beacons</button>
+    <button id="briefing-close" class="ghost-button">Back</button>
+  </div>
+</aside>
+
+<!-- The table -->
+<section id="table-screen" class="screen table-screen hidden">
+  <div id="banner" class="banner" role="status"></div>
+
+  <header class="rail rail-warden">
+    <div class="rail-id">
+      <div class="sigil sigil-warden" aria-hidden="true"></div>
+      <div>
+        <p class="rail-name">The Warden</p>
+        <p class="rail-note">keeper of the north light</p>
+      </div>
+    </div>
+    <div class="flame-block">
+      <p class="flame-label">Flame</p>
+      <p id="warden-flame" class="flame-number">20</p>
+      <div class="flame-bar"><i id="warden-bar-fill" class="flame-fill warden-fill"></i></div>
+    </div>
+    <div class="rail-meta">
+      <div class="oil-block">
+        <p class="meta-label">Oil</p>
+        <div id="warden-oil" class="oil-pips"></div>
+      </div>
+      <div class="count-block">
+        <p class="meta-label">Deck</p>
+        <p id="warden-deck" class="count-number">24</p>
+      </div>
+      <div class="count-block">
+        <p class="meta-label">Hand</p>
+        <p id="warden-hand-count" class="count-number">4</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="table-main">
+    <div class="table-aside">
+      <p id="round-label" class="round-label">Round 1</p>
+      <p id="tide-call" class="tide-call">Spring Tide in 3 rounds</p>
+      <ul id="table-log" class="table-log" aria-live="polite"></ul>
+    </div>
+    <div id="beacons" class="beacons"></div>
+  </main>
+
+  <footer class="rail rail-player">
+    <div class="rail-id">
+      <div class="sigil sigil-player" aria-hidden="true"></div>
+      <div>
+        <p class="rail-name">You</p>
+        <p class="rail-note">keeper of the west light</p>
+      </div>
+    </div>
+    <div class="flame-block">
+      <p class="flame-label">Flame</p>
+      <p id="player-flame" class="flame-number">20</p>
+      <div class="flame-bar"><i id="player-bar-fill" class="flame-fill player-fill"></i></div>
+    </div>
+    <div class="rail-meta">
+      <div class="oil-block">
+        <p class="meta-label">Oil</p>
+        <div id="player-oil" class="oil-pips"></div>
+      </div>
+      <div class="count-block">
+        <p class="meta-label">Deck</p>
+        <p id="player-deck" class="count-number">19</p>
+      </div>
+      <div class="count-block">
+        <p class="meta-label">Hand</p>
+        <p id="player-hand-count" class="count-number">5</p>
+      </div>
+    </div>
+    <div class="rail-actions">
+      <button id="end-turn" class="brass-button end-turn">End turn<small>Space</small></button>
+      <button id="mute-button" class="ghost-button small">sound on</button>
+      <button id="how-to-play-table" class="ghost-button small">rules</button>
+    </div>
+  </footer>
+
+  <div id="hand" class="hand"></div>
+  <div id="floats" class="floats" aria-hidden="true"></div>
+</section>
+
+<!-- The result -->
+<section id="result-screen" class="screen result hidden">
+  <div class="result-stack">
+    <div class="result-seal" data-tone="win" aria-hidden="true"><span></span></div>
+    <p class="result-kicker">Your lantern holds</p>
+    <h2 class="result-title">The Warden&rsquo;s Flame gutters out</h2>
+    <p class="result-body">Three beacons kept, a tide read, a warden outlasted.</p>
+    <p class="result-line">your Flame 11 &middot; the Warden&rsquo;s 0</p>
+    <div class="result-actions">
+      <button id="play-again" class="brass-button">Duel again</button>
+      <button id="result-title-button" class="ghost-button">Title screen</button>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
