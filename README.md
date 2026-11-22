@@ -1,5 +1,9 @@
 # Lanternfall
 
+[![best card game](https://make.fun/badge/best-card-game-20261122-1826.svg)](https://make.fun/bounty/best-card-game-20261122-1826)
+[![rank](https://make.fun/badge/best-card-game-20261122-1826/Peolite001/lanternfall/rank.svg)](https://make.fun/bounty/best-card-game-20261122-1826)
+[![reward](https://make.fun/badge/best-card-game-20261122-1826/Peolite001/lanternfall/reward.svg)](https://make.fun/bounty/best-card-game-20261122-1826)
+
 *Two keepers. Three beacons. One Flame that must not go out.*
 
 Lanternfall is an original card duel for the desktop browser. You and the Warden each keep one side
@@ -8,6 +12,8 @@ the rail at whatever faces them, and you spend **Oil** to do it. Both Flames sta
 other keeper's Flame to 0 and the lantern is yours.
 
 No build step, no dependencies, no network requests: it is plain HTML, CSS and ES modules.
+
+Lanternfall is entered in the [make.fun best card game bounty](https://make.fun/bounty/best-card-game-20261122-1826).
 
 ![The table: both Flame rails, three beacons and a hand of five](screenshots/1-table.jpg)
 
